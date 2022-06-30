@@ -10,7 +10,7 @@ var createOption = document.createElement("ul");
 var score = 0;
 var questionIndex = 0;
 
-
+//List of questions requiring input
 var questions = [
   {
     title: "Inside which HTML element do we put the JavaScript?",
@@ -25,7 +25,7 @@ var questions = [
   {
     title: "How would you call a function named myFunction?",
     choices: ["myFunction()", "call function myFunction()", "call myFunction()"],
-    answer: "C"
+    answer: "myFunction()"
   },
   {
     title: "How does a while loop start?",
@@ -39,6 +39,7 @@ var questions = [
   }
 ]; 
 
+//Event listener to begin the countdown, and start the timer
     startBtn.addEventListener("click", function() {
         countdown();
         startQuiz(questionIndex);
@@ -64,7 +65,7 @@ var questions = [
           optionList.addEventListener("click", (correctAnswer));
       })
   };
-
+//Function to fire an event that happens when the right or wrong answer is chosen
   function correctAnswer(event) {
     var element = event.target;
     console.log(element);
@@ -81,18 +82,18 @@ var questions = [
           alert("Incorrect. The right answer is: " + questions[questionIndex].answer);
       };
     };
-
+//score/quiz finished when index is greater than length. 
     questionIndex ++;
     if (questionIndex >= questions.length) {
       quizDone();
-      createDiv.textContent = "Your score is: " + score;    
+      createDiv.textContent = "The number of questions you answered correctly: " + score;    
     } else {
       startQuiz(questionIndex);                    
       }
       gameEl.appendChild(createDiv);
   };
 
-
+//Function that stops the timer, and creates document elements to provide information to the user.
   function quizDone() {
     gameEl.innerHTML = "";
     stopCountdown();
@@ -149,22 +150,22 @@ var questions = [
           }
       });   
   };
-
+//Function containing the time left if the quiz hasn't finished.
   function countdown() {          
     timeInterval = setInterval(function() {
     if(timeLeft >= 1) {
       timerEl.textContent = "Time left:  " + timeLeft;
       timeLeft -= 1;
     }; 
+  //Call to the timeOver element whenever time has finished or the quiz is completed
   function displayMessage() {
     alert(timeOver);
   };
     }, 1000)
 };
 
-
   function stopCountdown() {
     clearInterval(timeInterval);
-    timerEl.textContent = "You're out of time, sorry!"
+    timerEl.textContent = "The Quiz is Finished!"
     console.log(timeInterval);
   };
